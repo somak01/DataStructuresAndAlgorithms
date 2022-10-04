@@ -19,6 +19,17 @@ void insertAfter(Node* &after, Node* new_node)
     after->next = new_node;//and the after node next should point now to the new_node
 
 }
+void insertEnd(Node* &head, Node* new_node)
+{
+    Node* temp = head;
+
+    while (temp->next != 0)
+    {
+        temp = temp->next;
+    }
+
+    temp->next = new_node;
+}
 
 int main()
 {
@@ -50,12 +61,20 @@ int main()
     Node* to_be_inserted_beg;
     to_be_inserted_beg = (Node*)malloc(sizeof(Node));
     to_be_inserted_beg->val = 5;
+    to_be_inserted_beg->next = 0;
     insertBeginning(head, to_be_inserted_beg);
 
     Node* to_be_inserted;
     to_be_inserted = (Node*)malloc(sizeof(Node));
     to_be_inserted->val = 1234;
     insertAfter(to_be_inserted_beg, to_be_inserted);
+
+    
+    Node* to_be_inserted_end;
+    to_be_inserted_end = (Node*)malloc(sizeof(Node));
+    to_be_inserted_end->val = 98;
+    to_be_inserted_end->next = 0;
+    insertEnd(head, to_be_inserted_end);
 
     //std::cout<<head->val<<"anyadat";
 
@@ -73,4 +92,5 @@ int main()
 
 
     return 0;
+    std::exit;
 }
