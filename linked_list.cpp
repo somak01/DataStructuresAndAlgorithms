@@ -1,4 +1,5 @@
 #include<iostream>
+#include "test.h"
 
 typedef struct Node Node;
 
@@ -23,21 +24,60 @@ void insertEnd(Node* &head, Node* new_node)
 {
     Node* temp = head;
 
-    while (temp->next != 0)
-    {
+    while (temp->next != 0)//traverse trough the elements until we reach the one that points to 0
+    {                      
         temp = temp->next;
     }
 
-    temp->next = new_node;
+    temp->next = new_node;//after we find that we make it point to the new node
 }
 
 void deleteBeginning(Node* &head)
 {
     Node* temp = head;
 
-    head = head->next;
+    head = head->next;//head will be equal to head next and we clear out the memory space for the old head pointer
     free(temp);
 }
+
+void deleteEnd(Node* &head)
+{
+    Node* temp = head;
+    Node* prevNode;
+
+    while (temp->next != 0)
+    {
+        prevNode = temp;
+        temp = temp->next;
+    }
+    if (temp == head)
+    {
+        head = 0;
+    }
+    else
+    {
+        prevNode->next = 0;
+    }
+    free(temp);
+}
+
+
+void deleteFromPos(Node* &head, int pos)
+{
+    Node* temp = head;
+    Node* nextNode;
+    int i = 1;
+
+    while (i < pos - 1)
+    {
+        temp = temp->next;
+        i++;
+    }
+    nextNode = temp->next;
+    temp->next = nextNode->next;
+    free(nextNode);
+}
+
 
 int main()
 {
@@ -87,6 +127,9 @@ int main()
 
     deleteBeginning(head);
     //std::cout<<head->val<<"anyadat";
+    deleteEnd(head);
+
+    deleteFromPos(head, 2);
 
     temp = head;
     int count  = 0;
@@ -100,7 +143,6 @@ int main()
     //std::cout<<"xd";
     std::cout<<"\n"<<count;
 
-
+    helloFunc();
     return 0;
-    std::exit;
 }
