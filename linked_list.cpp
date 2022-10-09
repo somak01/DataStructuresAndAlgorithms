@@ -31,6 +31,14 @@ void insertEnd(Node* &head, Node* new_node)
     temp->next = new_node;
 }
 
+void deleteBeginning(Node* &head)
+{
+    Node* temp = head;
+
+    head = head->next;
+    free(temp);
+}
+
 int main()
 {
     Node* head = 0, *new_node, *temp;//we need temp because without it we would lost nodes
@@ -76,6 +84,8 @@ int main()
     to_be_inserted_end->next = 0;
     insertEnd(head, to_be_inserted_end);
 
+
+    deleteBeginning(head);
     //std::cout<<head->val<<"anyadat";
 
     temp = head;
